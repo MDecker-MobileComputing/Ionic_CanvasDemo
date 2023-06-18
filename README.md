@@ -2,8 +2,8 @@
 
 <br>
 
-This repository contains an Ionic app (based on Angular) that demonstrates how
-thw HTML Canvas can be used for drawing.
+This repository contains an [Ionic app](https://ionicframework.com/) with [Angular](https://angular.io/) that demonstrates how
+the [HTML Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial) can be used for drawing.
 
 <br>
 
