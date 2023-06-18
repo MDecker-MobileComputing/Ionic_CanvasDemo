@@ -15,11 +15,15 @@ import { Platform } from '@ionic/angular';
 })
 export class HomePage implements AfterViewInit {
 
+  /** Member-Variable für Zugriff auf HTML-Element mit Anker `#leinwand`. */
   @ViewChild("leinwand", { static: false }) canvas: any;
 
   private canvasElement: any;
 
+  /** Aktuelle Canvas-Breite in Pixel (px). */
   private canvasBreite = 0;
+
+    /** Aktuelle Canvas-Höhe in Pixel (px). */
   private canvasHoehe  = 0;
 
   /** Über RadioButtons in Akkordeon-Element gewählte Motiv, das im Canvas dargestellt wird.  */
@@ -90,12 +94,24 @@ export class HomePage implements AfterViewInit {
   }
 
   /**
+   * Getter für Zeichenkontext.
+   * @returns Zeichenkontext (wurde zurückgesetzt).
+   */
+  private getZeichenKontext() { 
+
+    const kontext = this.canvasElement.getContext("2d");
+    kontext.reset();
+
+    return kontext;
+  }
+
+  /**
    * Löscht die Zeichenfläche, v.a. vor Zeichnen eines neuen Motivs.
    */
   private canvasLoeschen() {
 
-    const zeichenContext = this.canvasElement.getContext("2d");
-    zeichenContext.clearRect(0, 0, this.canvasBreite , this.canvasHoehe);
+    const kontext = this.getZeichenKontext();
+    kontext.clearRect(0, 0, this.canvasBreite , this.canvasHoehe);
 
     console.log("Zeichenfläche wurde gelöscht.");
   }
@@ -125,29 +141,27 @@ export class HomePage implements AfterViewInit {
    */
   private zeichneDiagonalen() {
 
-    const zeichenContext = this.canvasElement.getContext("2d");
-
-    zeichenContext.reset();
+    const kontext = this.getZeichenKontext();
 
     // Line 1: links oben nach rechts unten
-    zeichenContext.lineJoin    = "round";
-    zeichenContext.strokeStyle = "#ff0000"; // rot
-    zeichenContext.lineWidth   = 2;
+    kontext.lineJoin    = "round";
+    kontext.strokeStyle = "#ff0000"; // rot
+    kontext.lineWidth   = 2;
 
-    zeichenContext.beginPath;
-    zeichenContext.moveTo( 0, 0 );
-    zeichenContext.lineTo( this.canvasBreite, this.canvasHoehe ); // x,y
-    zeichenContext.closePath();
-    zeichenContext.stroke();
+    kontext.beginPath;
+    kontext.moveTo( 0, 0 );
+    kontext.lineTo( this.canvasBreite, this.canvasHoehe ); // x,y
+    kontext.closePath();
+    kontext.stroke();
 
     // Linie 2: links unten nach recht oben
-    zeichenContext.strokeStyle = "#0000ff"; // blau
+    kontext.strokeStyle = "#0000ff"; // blau
 
-    zeichenContext.beginPath();
-    zeichenContext.moveTo(                 0, this.canvasHoehe );
-    zeichenContext.lineTo( this.canvasBreite, 0                );
-    zeichenContext.closePath();
-    zeichenContext.stroke();
+    kontext.beginPath();
+    kontext.moveTo(                 0, this.canvasHoehe );
+    kontext.lineTo( this.canvasBreite, 0                );
+    kontext.closePath();
+    kontext.stroke();
 
     console.log("Diagonalen gezeichnet.");
   }
@@ -162,21 +176,19 @@ export class HomePage implements AfterViewInit {
 
       const radius = Math.min(this.canvasBreite, this.canvasHoehe) * 0.4;
 
-      const zeichenContext = this.canvasElement.getContext("2d");
-      zeichenContext.reset();
+      const kontext = this.getZeichenKontext();
 
-      zeichenContext.lineJoin    = "round";
-      zeichenContext.strokeStyle = "#00ff00"; // grün
-      zeichenContext.lineWidth   = 2;
+      kontext.lineJoin    = "round";
+      kontext.strokeStyle = "#00ff00"; // grün
+      kontext.lineWidth   = 2;
 
-      zeichenContext.beginPath();
-      zeichenContext.arc( mittelpunktX, mittelpunktY,
+      kontext.beginPath();
+      kontext.arc( mittelpunktX, mittelpunktY,
                           radius,
                           0, // Startwinkel
                           2 * Math.PI // Endwinkel
                         );
-      //zeichenContext.closePath();
-      zeichenContext.stroke();
+      kontext.stroke();
 
       console.log("Kreis gezeichnet.");
     }
