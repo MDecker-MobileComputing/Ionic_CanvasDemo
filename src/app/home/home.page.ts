@@ -140,6 +140,10 @@ export class HomePage implements AfterViewInit {
         this.zeichneDreieck();
         break;
 
+      case "rechteck":
+        this.zeichneRechteck();
+        break;
+
       default: console.log(`Unerwartetes Motiv "${this.motiv}" ausgewählt.`);
     }
   }
@@ -230,5 +234,28 @@ export class HomePage implements AfterViewInit {
       kontext.fill();
 
       console.log("Dreieck gezeichnet.");
+    }
+
+    /**
+     * Zeichnet ein Rechteck.
+     */
+    private zeichneRechteck() {
+
+      const kontext = this.getZeichenKontext();
+
+      const abstandRand = 10;
+
+      kontext.strokeStyle = "#ff0000"; // schwarz
+
+      kontext.beginPath();
+
+      kontext.rect(abstandRand,  // x
+                   abstandRand,  // y
+                   this.canvasBreite - 2*abstandRand,  // Breite
+                   this.canvasHoehe  - 2*abstandRand); // Höhe
+
+      kontext.stroke();
+
+      console.log("Rechteck gezeichnet.");
     }
 }
