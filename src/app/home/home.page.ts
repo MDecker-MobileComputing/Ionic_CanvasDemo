@@ -95,12 +95,16 @@ export class HomePage implements AfterViewInit {
 
   /**
    * Getter für Zeichenkontext.
+   *
    * @returns Zeichenkontext (wurde zurückgesetzt).
    */
   private getZeichenKontext() { 
 
     const kontext = this.canvasElement.getContext("2d");
     kontext.reset();
+
+    kontext.lineJoin    = "round";
+    kontext.lineWidth   = 2;
 
     return kontext;
   }
@@ -132,6 +136,10 @@ export class HomePage implements AfterViewInit {
         this.zeichneKreis();
         break;
 
+      case "dreieck":
+        this.zeichneDreieck();
+        break;
+
       default: console.log(`Unerwartetes Motiv "${this.motiv}" ausgewählt.`);
     }
   }
@@ -144,9 +152,7 @@ export class HomePage implements AfterViewInit {
     const kontext = this.getZeichenKontext();
 
     // Line 1: links oben nach rechts unten
-    kontext.lineJoin    = "round";
     kontext.strokeStyle = "#ff0000"; // rot
-    kontext.lineWidth   = 2;
 
     kontext.beginPath;
     kontext.moveTo( 0, 0 );
@@ -171,16 +177,14 @@ export class HomePage implements AfterViewInit {
    */
   private zeichneKreis() {
 
+      const kontext = this.getZeichenKontext();
+
       const mittelpunktX = this.canvasBreite / 2;
       const mittelpunktY = this.canvasHoehe  / 2;
 
       const radius = Math.min(this.canvasBreite, this.canvasHoehe) * 0.4;
 
-      const kontext = this.getZeichenKontext();
-
-      kontext.lineJoin    = "round";
       kontext.strokeStyle = "#00ff00"; // grün
-      kontext.lineWidth   = 2;
 
       kontext.beginPath();
       kontext.arc( mittelpunktX, mittelpunktY,
@@ -193,4 +197,38 @@ export class HomePage implements AfterViewInit {
       console.log("Kreis gezeichnet.");
     }
 
+    /**
+     * Zeichnet ein gefülltes Dreick.
+     */
+    private zeichneDreieck() {
+
+      const kontext = this.getZeichenKontext();
+
+      const abstandRand = 5;
+
+      // Punkt A: oben mitte
+      const ax = this.canvasBreite / 2;
+      const ay = abstandRand;
+
+      // Punkt B: links unten
+      const bx = abstandRand;
+      const by = this.canvasHoehe - abstandRand;
+
+      // Punkt C: rechts unten
+      const cx = this.canvasBreite - abstandRand;
+      const cy = by;
+
+      kontext.fillStyle   = "#ffff00"; // gelb
+      kontext.strokeStyle = '#000000'; // schwarz
+
+      kontext.beginPath();
+      kontext.moveTo(ax, ay);
+      kontext.lineTo(bx, by);
+      kontext.lineTo(cx, cy);
+      kontext.closePath();
+
+      kontext.fill();
+
+      console.log("Dreieck gezeichnet.");
+    }
 }
