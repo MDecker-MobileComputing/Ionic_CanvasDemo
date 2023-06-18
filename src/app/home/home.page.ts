@@ -17,10 +17,14 @@ export class HomePage implements AfterViewInit {
 
   private canvasElement: any;
 
+  private canvasBreite = 0;
+  private canvasHoehe  = 0;
+
   /**
    * Constructor for Dependency Injection.
    */
   constructor(private platform: Platform) {}
+
 
   /**
    * Lifecycle-Methode. Einzige Methode aus Interface AfterViewInit.
@@ -39,6 +43,9 @@ export class HomePage implements AfterViewInit {
     this.canvasElement.width  = viewportBreite*0.98 + "";
     this.canvasElement.height = viewportHoehe *0.60 + "";
 
+    this.canvasBreite = this.canvasElement.width;
+    this.canvasHoehe  = this.canvasElement.height;
+
     console.log(`Canvas: breite=${this.canvasElement.width}px, hoehe=${this.canvasElement.height}px`);
 
     this.zeichneDiagonalen();
@@ -48,15 +55,24 @@ export class HomePage implements AfterViewInit {
 
     const zeichenContext = this.canvasElement.getContext("2d");
 
+    // Line 1: links oben nach rechts unten
     zeichenContext.lineJoin    = "round";
     zeichenContext.strokeStyle = "#ff0000"; // rot
     zeichenContext.lineWidth   = 2;
 
     zeichenContext.beginPath;
     zeichenContext.moveTo( 0, 0 );
-    zeichenContext.lineTo( this.canvasElement.width, this.canvasElement.height ); // x,y
+    zeichenContext.lineTo( this.canvasBreite, this.canvasHoehe ); // x,y
     zeichenContext.closePath();
+    zeichenContext.stroke();
 
+    // Linie 2: links unten nach recht oben
+    zeichenContext.strokeStyle = "#0000ff"; // blau
+
+    zeichenContext.beginPath();
+    zeichenContext.moveTo(                 0, this.canvasHoehe );
+    zeichenContext.lineTo( this.canvasBreite, 0                );
+    zeichenContext.closePath();
     zeichenContext.stroke();
 
   }
