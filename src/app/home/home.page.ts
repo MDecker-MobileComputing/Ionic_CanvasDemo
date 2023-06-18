@@ -5,6 +5,8 @@ import { Platform } from '@ionic/angular';
  * Demo für Zeichnen auf HTML5-Canvas-Element.
  * <br><br>
  * Vorgehen nach https://devdactic.com/canvas-painting-ionic-4
+ * <br><br>
+ * Erklärung Koordinatensystem: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
  */
 @Component({
   selector: 'app-home',
@@ -64,6 +66,9 @@ export class HomePage implements AfterViewInit {
    * Zeichenfläche initialisieren: Member-Variable `canvasElement`
    * füllen und von Zeichenfläche anhand aktueller Viewport-Größe
    * festlegen. Danach wird das aktuell gewählte Motiv gezeichnet.
+   * <br><br>
+   * Die Methode muss ganz zu Beginn und nach Änderungen der
+   * Viewport-Größe aufgerufen werden.
    */
   private initCanvas() {
 
@@ -90,7 +95,7 @@ export class HomePage implements AfterViewInit {
   private canvasLoeschen() {
 
     const zeichenContext = this.canvasElement.getContext("2d");
-    zeichenContext.clearRect(0, 0, this.canvasBreite, this.canvasHoehe);
+    zeichenContext.clearRect(0, 0, this.canvasBreite , this.canvasHoehe);
 
     console.log("Zeichenfläche wurde gelöscht.");
   }
@@ -116,39 +121,13 @@ export class HomePage implements AfterViewInit {
   }
 
   /**
-   * Methode um Kreis in Canvas zu zeichnen.
-   */
-  private zeichneKreis() {
-
-    const mittelpunktX = this.canvasBreite / 2;
-    const mittelpunktY = this.canvasHoehe  / 2;
-
-    const radius = Math.min(this.canvasBreite, this.canvasHoehe) * 0.4;
-
-    const zeichenContext = this.canvasElement.getContext("2d");
-
-    zeichenContext.lineJoin    = "round";
-    zeichenContext.strokeStyle = "#00ff00"; // grün
-    zeichenContext.lineWidth   = 2;
-
-    zeichenContext.beginPath();
-    zeichenContext.arc( mittelpunktX, mittelpunktY,
-                        radius,
-                        0, // Startwinkel
-                        2 * Math.PI // Endwinkel
-                      );
-    zeichenContext.closePath();
-    zeichenContext.stroke();
-
-    console.log("Kreis gezeichnet.");
-  }
-
-  /**
    * Methode um Diagonalen in Canvas zu zeichnen.
    */
   private zeichneDiagonalen() {
 
     const zeichenContext = this.canvasElement.getContext("2d");
+
+    zeichenContext.reset();
 
     // Line 1: links oben nach rechts unten
     zeichenContext.lineJoin    = "round";
@@ -172,5 +151,34 @@ export class HomePage implements AfterViewInit {
 
     console.log("Diagonalen gezeichnet.");
   }
+
+  /**
+   * Methode um Kreis in Canvas zu zeichnen.
+   */
+  private zeichneKreis() {
+
+      const mittelpunktX = this.canvasBreite / 2;
+      const mittelpunktY = this.canvasHoehe  / 2;
+
+      const radius = Math.min(this.canvasBreite, this.canvasHoehe) * 0.4;
+
+      const zeichenContext = this.canvasElement.getContext("2d");
+      zeichenContext.reset();
+
+      zeichenContext.lineJoin    = "round";
+      zeichenContext.strokeStyle = "#00ff00"; // grün
+      zeichenContext.lineWidth   = 2;
+
+      zeichenContext.beginPath();
+      zeichenContext.arc( mittelpunktX, mittelpunktY,
+                          radius,
+                          0, // Startwinkel
+                          2 * Math.PI // Endwinkel
+                        );
+      //zeichenContext.closePath();
+      zeichenContext.stroke();
+
+      console.log("Kreis gezeichnet.");
+    }
 
 }
