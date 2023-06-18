@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
 /**
@@ -25,14 +25,27 @@ export class HomePage implements AfterViewInit {
    */
   constructor(private platform: Platform) {}
 
-
   /**
    * Lifecycle-Methode. Einzige Methode aus Interface AfterViewInit.
+   */
+  public ngAfterViewInit() {
+
+    this.initCanvas();
+  }
+
+  /**
+   * Methode wird augerufen wenn sich Viewport-Größe ändert.
    * <br><br>
    *
    * Werkzeug zur Messung aktuelle Viewport-Größe im Browser: https://whatismyviewport.com/
    */
-  public ngAfterViewInit() {
+  @HostListener("window:resize") onViewportSizeChanged() {
+
+    console.log("Viewport-Dim geändert!");
+    this.initCanvas();
+  }
+
+  private initCanvas() {
 
     const viewportBreite = this.platform.width();
     const viewportHoehe  = this.platform.height();
@@ -40,7 +53,7 @@ export class HomePage implements AfterViewInit {
 
     this.canvasElement = this.canvas.nativeElement;
 
-    this.canvasElement.width  = viewportBreite*0.98 + "";
+    this.canvasElement.width  = viewportBreite*0.90 + "";
     this.canvasElement.height = viewportHoehe *0.60 + "";
 
     this.canvasBreite = this.canvasElement.width;
