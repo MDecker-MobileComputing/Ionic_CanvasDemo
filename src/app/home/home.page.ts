@@ -218,8 +218,8 @@ export class HomePage implements AfterViewInit {
       const cx = this.canvasBreite - abstandRand;
       const cy = by;
 
-      kontext.fillStyle   = "#ffff00"; // gelb
-      kontext.strokeStyle = '#000000'; // schwarz
+      kontext.fillStyle   = "#ff00ff"; // violett
+      kontext.strokeStyle = "#000000"; // schwarz
 
       kontext.beginPath();
       kontext.moveTo(ax, ay);
