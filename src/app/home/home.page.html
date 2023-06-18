@@ -6,8 +6,41 @@
 
 <ion-content [fullscreen]="true">
 
-  <p class="ion-padding">Die Zeichenfläche (Canvas):</p>
-
   <canvas #leinwand></canvas>
+
+
+  <div>
+
+    <p>Was soll gezeichnet werden?</p>
+
+    <ion-radio-group [(ngModel)]="motiv" (ionChange)="onMotivAuswahlGeaendert()">
+
+      <ion-accordion-group>
+
+        <ion-accordion>
+          <ion-item slot="header" color="light">
+            <ion-label>Geometrische Grundformen</ion-label>
+          </ion-item>
+          <div slot="content">
+              <ion-radio value="diagonalen">Diagonalen</ion-radio><br/>
+              <ion-radio value="kreis"     >Kreis</ion-radio><br/>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion>
+          <ion-item slot="header" color="light">
+            <ion-label>Grafiken</ion-label>
+          </ion-item>
+          <div slot="content">
+              <ion-radio value="balkendiagramm"   >Balkendiagramm</ion-radio><br/>
+              <ion-radio value="vollstaendigGraph">Vollständiger Graph</ion-radio><br/>
+          </div>
+        </ion-accordion>
+
+      </ion-accordion-group>
+
+    </ion-radio-group>
+
+  </div>
 
 </ion-content>

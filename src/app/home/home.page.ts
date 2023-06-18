@@ -20,6 +20,9 @@ export class HomePage implements AfterViewInit {
   private canvasBreite = 0;
   private canvasHoehe  = 0;
 
+  /** Über RadioButtons in Akkordeon-Element gewählte Motiv, das im Canvas dargestellt wird.  */
+  public motiv = "diagonalen";
+
   /**
    * Constructor for Dependency Injection.
    */
@@ -45,6 +48,23 @@ export class HomePage implements AfterViewInit {
     this.initCanvas();
   }
 
+  /**
+   * Event-Handler-Methode für RadioGroup, mit der Motiv ausgewählt
+   * wird, das zu zeichnen ist.
+   */
+  public onMotivAuswahlGeaendert() {
+
+    console.log("Neues Motiv ausgewählt.");
+
+    this.canvasLoeschen();
+    this.motivZeichnen();
+  }
+
+  /**
+   * Zeichenfläche initialisieren: Member-Variable `canvasElement`
+   * füllen und von Zeichenfläche anhand aktueller Viewport-Größe
+   * festlegen. Danach wird das aktuell gewählte Motiv gezeichnet.
+   */
   private initCanvas() {
 
     const viewportBreite = this.platform.width();
@@ -53,7 +73,7 @@ export class HomePage implements AfterViewInit {
 
     this.canvasElement = this.canvas.nativeElement;
 
-    this.canvasElement.width  = viewportBreite*0.90 + "";
+    this.canvasElement.width  = viewportBreite*0.90 + ""; // weil in CSS-Datei margin-left=margin-right=5%; 100%-2*5%=90%
     this.canvasElement.height = viewportHoehe *0.60 + "";
 
     this.canvasBreite = this.canvasElement.width;
@@ -61,9 +81,71 @@ export class HomePage implements AfterViewInit {
 
     console.log(`Canvas: breite=${this.canvasElement.width}px, hoehe=${this.canvasElement.height}px`);
 
-    this.zeichneDiagonalen();
+    this.motivZeichnen();
   }
 
+  /**
+   * Löscht die Zeichenfläche, v.a. vor Zeichnen eines neuen Motivs.
+   */
+  private canvasLoeschen() {
+
+    const zeichenContext = this.canvasElement.getContext("2d");
+    zeichenContext.clearRect(0, 0, this.canvasBreite, this.canvasHoehe);
+
+    console.log("Zeichenfläche wurde gelöscht.");
+  }
+
+  /**
+   * Wertet aktuell in RadioGroup gewähltes Motiv aus und
+   * ruft entsprechende Methode auf, um es zu zeichnen.
+   */
+  private motivZeichnen() {
+
+    switch (this.motiv) {
+
+      case "diagonalen":
+        this.zeichneDiagonalen();
+        break;
+
+      case "kreis":
+        this.zeichneKreis();
+        break;
+
+      default: console.log(`Unerwartetes Motiv "${this.motiv}" ausgewählt.`);
+    }
+  }
+
+  /**
+   * Methode um Kreis in Canvas zu zeichnen.
+   */
+  private zeichneKreis() {
+
+    const mittelpunktX = this.canvasBreite / 2;
+    const mittelpunktY = this.canvasHoehe  / 2;
+
+    const radius = Math.min(this.canvasBreite, this.canvasHoehe) * 0.4;
+
+    const zeichenContext = this.canvasElement.getContext("2d");
+
+    zeichenContext.lineJoin    = "round";
+    zeichenContext.strokeStyle = "#00ff00"; // grün
+    zeichenContext.lineWidth   = 2;
+
+    zeichenContext.beginPath();
+    zeichenContext.arc( mittelpunktX, mittelpunktY,
+                        radius,
+                        0, // Startwinkel
+                        2 * Math.PI // Endwinkel
+                      );
+    zeichenContext.closePath();
+    zeichenContext.stroke();
+
+    console.log("Kreis gezeichnet.");
+  }
+
+  /**
+   * Methode um Diagonalen in Canvas zu zeichnen.
+   */
   private zeichneDiagonalen() {
 
     const zeichenContext = this.canvasElement.getContext("2d");
@@ -88,6 +170,7 @@ export class HomePage implements AfterViewInit {
     zeichenContext.closePath();
     zeichenContext.stroke();
 
+    console.log("Diagonalen gezeichnet.");
   }
 
 }
