@@ -285,7 +285,7 @@ export class HomePage implements AfterViewInit {
     const mittelpunktY = this.canvasHoehe  / 2;
 
     const radiusHorizontal = this.canvasBreite * 0.5 * 0.9;
-    const radiusVertikal   = this.canvasHoehe  * 0.5 * 0.8;
+    const radiusVertikal   = this.canvasHoehe  * 0.5 * 0.4;
 
     kontext.strokeStyle = "#0000ff"; // blau
 
