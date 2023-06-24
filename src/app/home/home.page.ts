@@ -31,6 +31,8 @@ export class HomePage implements AfterViewInit {
 
   /**
    * Constructor for Dependency Injection.
+   *
+   * @param platform Objekt zur Abfrage von Viewport-Höhe/Breite
    */
   constructor(private platform: Platform) {}
 
@@ -103,8 +105,8 @@ export class HomePage implements AfterViewInit {
     const kontext = this.canvasElement.getContext("2d");
     kontext.reset();
 
-    kontext.lineJoin    = "round";
-    kontext.lineWidth   = 2;
+    kontext.lineJoin  = "round";
+    kontext.lineWidth = 2;
 
     return kontext;
   }
@@ -146,6 +148,10 @@ export class HomePage implements AfterViewInit {
 
       case "ellipse":
         this.zeichneEllilpse();
+        break;
+
+      case "bezier":
+        this.zeichneBezier();
         break;
 
       default: console.log(`Unerwartetes Motiv "${this.motiv}" ausgewählt.`);
@@ -274,7 +280,7 @@ export class HomePage implements AfterViewInit {
     const mittelpunktY = this.canvasHoehe  / 2;
 
     const radiusHorizontal = this.canvasBreite * 0.5 * 0.9;
-    const radiusVertikal   = this.canvasHoehe  * 0.5 * 0.9;
+    const radiusVertikal   = this.canvasHoehe  * 0.5 * 0.8;
 
     kontext.strokeStyle = "#0000ff"; // blau
 
@@ -288,6 +294,37 @@ export class HomePage implements AfterViewInit {
     kontext.stroke();
 
     console.log("Ellipse gezeichnet.");
+  }
+
+  /**
+   * Methode um Bézierkurve zu zeichnen.
+   */
+  private zeichneBezier() {
+
+    const kontext = this.getZeichenKontext();
+
+    kontext.strokeStyle = "#ff0000"; // rot
+
+    const startpunktX = 0;
+    const startpunktY = 0;
+
+    const endpunktX = this.canvasBreite;
+    const endpunktY = this.canvasHoehe;
+
+    // Kontrollpunkt 1
+    const kp1x = this.canvasBreite * 0.2;
+    const kp1y = this.canvasHoehe  * 0.8;
+
+    // Kontrollpunkt 1
+    const kp2x = this.canvasBreite * 0.8;
+    const kp2y = this.canvasHoehe  * 0.2;
+
+    kontext.beginPath();
+    kontext.moveTo(startpunktX, startpunktY);
+    kontext.bezierCurveTo(kp1x, kp1y, kp2x, kp2y, endpunktX, endpunktY);
+    kontext.stroke();
+
+    console.log("Bezierkurve gezeichnet.");
   }
 
 }
