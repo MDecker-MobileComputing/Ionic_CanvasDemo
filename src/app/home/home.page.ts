@@ -92,7 +92,7 @@ export class HomePage implements AfterViewInit {
     this.canvasBreite = this.canvasElement.width;
     this.canvasHoehe  = this.canvasElement.height;
 
-    console.log(`Canvas: breite=${this.canvasElement.width}px, hoehe=${this.canvasElement.height}px`);
+    console.log(`Canvas: Breite=${this.canvasElement.width}px, Höhe=${this.canvasElement.height}px`);
 
     this.motivZeichnen();
   }
@@ -244,7 +244,6 @@ export class HomePage implements AfterViewInit {
                     hoehe
                   );
 
-
       kontext.stroke();
 
       console.log("Rechteck gezeichnet.");
@@ -266,10 +265,10 @@ export class HomePage implements AfterViewInit {
 
     kontext.beginPath();
     kontext.arc( mittelpunktX, mittelpunktY,
-                        radius,
-                        0, // Startwinkel
-                        2 * Math.PI // Endwinkel
-                      );
+                 radius,
+                 0,          // Startwinkel
+                 2 * Math.PI // Endwinkel
+               );
     kontext.stroke();
 
     console.log("Kreis gezeichnet.");
@@ -293,8 +292,8 @@ export class HomePage implements AfterViewInit {
     kontext.beginPath();
     kontext.ellipse( mittelpunktX, mittelpunktY,
                      radiusHorizontal, radiusVertikal,
-                     0, // Rotation
-                     0, // Startwinkel
+                     0,          // Rotation
+                     0,          // Startwinkel
                      2 * Math.PI // Endwinkel
                    );
     kontext.stroke();
