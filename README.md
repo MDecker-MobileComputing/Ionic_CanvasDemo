@@ -9,6 +9,16 @@ the [HTML Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tu
 
 ----
 
+## Screenshot ##
+
+<br>
+
+![Screenshot 1](screenshot_1.png) &nbsp; ![Screenshot 2](screenshot_2.png) 
+
+<br>
+
+----
+
 ## License ##
 
 <br>
