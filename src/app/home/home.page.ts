@@ -48,7 +48,8 @@ export class HomePage implements AfterViewInit {
    * Methode wird augerufen wenn sich Viewport-Größe ändert.
    * <br><br>
    *
-   * Werkzeug zur Messung aktuelle Viewport-Größe im Browser: https://whatismyviewport.com/
+   * Werkzeug zur Messung aktuelle Viewport-Größe im Browser:
+   * https://whatismyviewport.com/
    */
   @HostListener("window:resize") onViewportSizeChanged() {
 
@@ -84,7 +85,8 @@ export class HomePage implements AfterViewInit {
 
     this.canvasElement = this.canvas.nativeElement;
 
-    this.canvasElement.width  = viewportBreite*0.90 + ""; // weil in CSS-Datei margin-left=margin-right=5%; 100%-2*5%=90%
+    // weil in CSS-Datei margin-left=margin-right=5%; 100%-2*5%=90% :
+    this.canvasElement.width  = viewportBreite*0.90 + "";
     this.canvasElement.height = viewportHoehe *0.60 + "";
 
     this.canvasBreite = this.canvasElement.width;
@@ -229,15 +231,19 @@ export class HomePage implements AfterViewInit {
       const kontext = this.getZeichenKontext();
 
       const abstandRand = 10;
+      const breite      = this.canvasBreite * 0.7;
+      const hoehe       = this.canvasHoehe  * 0.8;
 
       kontext.strokeStyle = "#ff0000"; // schwarz
 
       kontext.beginPath();
 
-      kontext.rect(abstandRand,  // x
-                   abstandRand,  // y
-                   this.canvasBreite - 2*abstandRand,  // Breite
-                   this.canvasHoehe  - 2*abstandRand); // Höhe
+      kontext.rect( abstandRand,  // x
+                    abstandRand,  // y
+                    breite,
+                    hoehe
+                  );
+
 
       kontext.stroke();
 
