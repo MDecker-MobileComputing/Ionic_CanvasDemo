@@ -302,7 +302,8 @@ export class HomePage implements AfterViewInit {
   }
 
   /**
-   * Methode um Bézierkurve zu zeichnen.
+   * Methode um Bézierkurve dritten Grades zu zeichnen.
+   * 
    */
   private zeichneBezier() {
 
@@ -320,7 +321,7 @@ export class HomePage implements AfterViewInit {
     const kp1x = this.canvasBreite * 0.2;
     const kp1y = this.canvasHoehe  * 0.8;
 
-    // Kontrollpunkt 1
+    // Kontrollpunkt 2
     const kp2x = this.canvasBreite * 0.8;
     const kp2y = this.canvasHoehe  * 0.2;
 
@@ -328,6 +329,24 @@ export class HomePage implements AfterViewInit {
     kontext.moveTo(startpunktX, startpunktY);
     kontext.bezierCurveTo(kp1x, kp1y, kp2x, kp2y, endpunktX, endpunktY);
     kontext.stroke();
+
+    // Kontrollpunkte als "Minikreise" darstellen
+    /*
+    kontext.strokeStyle = "#0000ff"; // blau
+
+    kontext.beginPath();
+    kontext.arc( kp1x, kp1y, // Mittelpunkt
+                 1,  // Radius
+                 0, 2 * Math.PI // Start- und Endwinkel
+               );
+    kontext.stroke();
+    kontext.beginPath();
+    kontext.arc( kp2x, kp2y, // Mittelpunkt
+                 1,  // Radius
+                 0, 2 * Math.PI // Start- und Endwinkel
+               );
+    kontext.stroke();
+    */
 
     console.log("Bezierkurve gezeichnet.");
   }
