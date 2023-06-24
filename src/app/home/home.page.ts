@@ -132,16 +132,20 @@ export class HomePage implements AfterViewInit {
         this.zeichneDiagonalen();
         break;
 
-      case "kreis":
-        this.zeichneKreis();
-        break;
-
       case "dreieck":
         this.zeichneDreieck();
         break;
 
       case "rechteck":
         this.zeichneRechteck();
+        break;
+
+      case "kreis":
+        this.zeichneKreis();
+        break;
+
+      case "ellipse":
+        this.zeichneEllilpse();
         break;
 
       default: console.log(`Unerwartetes Motiv "${this.motiv}" ausgewählt.`);
@@ -177,69 +181,44 @@ export class HomePage implements AfterViewInit {
   }
 
   /**
-   * Methode um Kreis in Canvas zu zeichnen.
+   * Zeichnet ein gefülltes Dreick.
    */
-  private zeichneKreis() {
+  private zeichneDreieck() {
 
-      const kontext = this.getZeichenKontext();
+    const kontext = this.getZeichenKontext();
 
-      const mittelpunktX = this.canvasBreite / 2;
-      const mittelpunktY = this.canvasHoehe  / 2;
+    const abstandRand = 5;
 
-      const radius = Math.min(this.canvasBreite, this.canvasHoehe) * 0.4;
+    // Punkt A: oben mitte
+    const ax = this.canvasBreite / 2;
+    const ay = abstandRand;
 
-      kontext.strokeStyle = "#00ff00"; // grün
+    // Punkt B: links unten
+    const bx = abstandRand;
+    const by = this.canvasHoehe - abstandRand;
 
-      kontext.beginPath();
-      kontext.arc( mittelpunktX, mittelpunktY,
-                          radius,
-                          0, // Startwinkel
-                          2 * Math.PI // Endwinkel
-                        );
-      kontext.stroke();
+    // Punkt C: rechts unten
+    const cx = this.canvasBreite - abstandRand;
+    const cy = by;
 
-      console.log("Kreis gezeichnet.");
-    }
+    kontext.fillStyle   = "#ff00ff"; // violett
+    kontext.strokeStyle = "#000000"; // schwarz
 
-    /**
-     * Zeichnet ein gefülltes Dreick.
-     */
-    private zeichneDreieck() {
+    kontext.beginPath();
+    kontext.moveTo(ax, ay);
+    kontext.lineTo(bx, by);
+    kontext.lineTo(cx, cy);
+    kontext.closePath();
 
-      const kontext = this.getZeichenKontext();
+    kontext.fill();
 
-      const abstandRand = 5;
+    console.log("Dreieck gezeichnet.");
+  }
 
-      // Punkt A: oben mitte
-      const ax = this.canvasBreite / 2;
-      const ay = abstandRand;
-
-      // Punkt B: links unten
-      const bx = abstandRand;
-      const by = this.canvasHoehe - abstandRand;
-
-      // Punkt C: rechts unten
-      const cx = this.canvasBreite - abstandRand;
-      const cy = by;
-
-      kontext.fillStyle   = "#ff00ff"; // violett
-      kontext.strokeStyle = "#000000"; // schwarz
-
-      kontext.beginPath();
-      kontext.moveTo(ax, ay);
-      kontext.lineTo(bx, by);
-      kontext.lineTo(cx, cy);
-      kontext.closePath();
-
-      kontext.fill();
-
-      console.log("Dreieck gezeichnet.");
-    }
-
-    /**
-     * Zeichnet ein Rechteck.
-     */
-    private zeichneRechteck() {
+  /**
+   * Zeichnet ein Rechteck.
+   */
+  private zeichneRechteck() {
 
       const kontext = this.getZeichenKontext();
 
@@ -257,5 +236,58 @@ export class HomePage implements AfterViewInit {
       kontext.stroke();
 
       console.log("Rechteck gezeichnet.");
-    }
+  }
+
+  /**
+   * Methode um Kreis in Canvas zu zeichnen.
+   */
+   private zeichneKreis() {
+
+    const kontext = this.getZeichenKontext();
+
+    const mittelpunktX = this.canvasBreite / 2;
+    const mittelpunktY = this.canvasHoehe  / 2;
+
+    const radius = Math.min(this.canvasBreite, this.canvasHoehe) * 0.4;
+
+    kontext.strokeStyle = "#00ff00"; // grün
+
+    kontext.beginPath();
+    kontext.arc( mittelpunktX, mittelpunktY,
+                        radius,
+                        0, // Startwinkel
+                        2 * Math.PI // Endwinkel
+                      );
+    kontext.stroke();
+
+    console.log("Kreis gezeichnet.");
+  }
+
+  /**
+   * Methode um Ellipse in Canvas zu zeichnen.
+   */
+  private zeichneEllilpse() {
+
+    const kontext = this.getZeichenKontext();
+
+    const mittelpunktX = this.canvasBreite / 2;
+    const mittelpunktY = this.canvasHoehe  / 2;
+
+    const radiusHorizontal = this.canvasBreite * 0.5 * 0.9;
+    const radiusVertikal   = this.canvasHoehe  * 0.5 * 0.9;
+
+    kontext.strokeStyle = "#0000ff"; // blau
+
+    kontext.beginPath();
+    kontext.ellipse( mittelpunktX, mittelpunktY,
+                     radiusHorizontal, radiusVertikal,
+                     0, // Rotation
+                     0, // Startwinkel
+                     2 * Math.PI // Endwinkel
+                   );
+    kontext.stroke();
+
+    console.log("Ellipse gezeichnet.");
+  }
+
 }
