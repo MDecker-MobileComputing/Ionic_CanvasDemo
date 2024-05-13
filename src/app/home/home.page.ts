@@ -34,7 +34,8 @@ export class HomePage implements AfterViewInit {
    *
    * @param platform Objekt zur Abfrage von Viewport-Höhe/Breite
    */
-  constructor(private platform: Platform) {}
+  constructor( private platform: Platform ) {}
+
 
   /**
    * Lifecycle-Methode. Einzige Methode aus Interface AfterViewInit.
@@ -43,6 +44,7 @@ export class HomePage implements AfterViewInit {
 
     this.initCanvas();
   }
+
 
   /**
    * Methode wird augerufen wenn sich Viewport-Größe ändert.
@@ -53,9 +55,10 @@ export class HomePage implements AfterViewInit {
    */
   @HostListener("window:resize") onViewportSizeChanged() {
 
-    console.log("Viewport-Dim geändert!");
+    console.log( "Viewport-Dimension geändert!" );
     this.initCanvas();
   }
+
 
   /**
    * Event-Handler-Methode für RadioGroup, mit der Motiv ausgewählt
@@ -63,11 +66,12 @@ export class HomePage implements AfterViewInit {
    */
   public onMotivAuswahlGeaendert() {
 
-    console.log("Neues Motiv ausgewählt.");
+    console.log( "Neues Motiv ausgewählt." );
 
     this.canvasLoeschen();
     this.motivZeichnen();
   }
+
 
   /**
    * Zeichenfläche initialisieren: Member-Variable `canvasElement`
@@ -97,6 +101,7 @@ export class HomePage implements AfterViewInit {
     this.motivZeichnen();
   }
 
+
   /**
    * Getter für Zeichenkontext.
    *
@@ -104,7 +109,7 @@ export class HomePage implements AfterViewInit {
    */
   private getZeichenKontext() { 
 
-    const kontext = this.canvasElement.getContext("2d");
+    const kontext = this.canvasElement.getContext( "2d" );
     kontext.reset();
 
     kontext.lineJoin  = "round";
@@ -113,16 +118,18 @@ export class HomePage implements AfterViewInit {
     return kontext;
   }
 
+
   /**
    * Löscht die Zeichenfläche, v.a. vor Zeichnen eines neuen Motivs.
    */
   private canvasLoeschen() {
 
     const kontext = this.getZeichenKontext();
-    kontext.clearRect(0, 0, this.canvasBreite , this.canvasHoehe);
+    kontext.clearRect( 0, 0, this.canvasBreite , this.canvasHoehe );
 
-    console.log("Zeichenfläche wurde gelöscht.");
+    console.log( "Zeichenfläche wurde gelöscht." );
   }
+
 
   /**
    * Wertet aktuell in RadioGroup gewähltes Motiv aus und
@@ -130,7 +137,7 @@ export class HomePage implements AfterViewInit {
    */
   private motivZeichnen() {
 
-    switch (this.motiv) {
+    switch ( this.motiv ) {
 
       case "diagonalen":
         this.zeichneDiagonalen();
@@ -156,9 +163,10 @@ export class HomePage implements AfterViewInit {
         this.zeichneBezier();
         break;
 
-      default: console.log(`Unerwartetes Motiv "${this.motiv}" ausgewählt.`);
+      default: console.log( `Unerwartetes Motiv "${this.motiv}" ausgewählt.` );
     }
   }
+
 
   /**
    * Methode um Diagonalen in Canvas zu zeichnen.
@@ -185,8 +193,9 @@ export class HomePage implements AfterViewInit {
     kontext.closePath();
     kontext.stroke();
 
-    console.log("Diagonalen gezeichnet.");
+    console.log( "Diagonalen gezeichnet." );
   }
+
 
   /**
    * Zeichnet ein gefülltes Dreick.
@@ -213,14 +222,14 @@ export class HomePage implements AfterViewInit {
     kontext.strokeStyle = "#000000"; // schwarz
 
     kontext.beginPath();
-    kontext.moveTo(ax, ay);
-    kontext.lineTo(bx, by);
-    kontext.lineTo(cx, cy);
+    kontext.moveTo( ax, ay );
+    kontext.lineTo( bx, by );
+    kontext.lineTo( cx, cy );
     kontext.closePath();
 
     kontext.fill();
 
-    console.log("Dreieck gezeichnet.");
+    console.log( "Dreieck gezeichnet." );
   }
 
   /**
@@ -246,7 +255,7 @@ export class HomePage implements AfterViewInit {
 
       kontext.stroke();
 
-      console.log("Rechteck gezeichnet.");
+      console.log( "Rechteck gezeichnet." );
   }
 
   /**
@@ -259,7 +268,7 @@ export class HomePage implements AfterViewInit {
     const mittelpunktX = this.canvasBreite / 2;
     const mittelpunktY = this.canvasHoehe  / 2;
 
-    const radius = Math.min(this.canvasBreite, this.canvasHoehe) * 0.4;
+    const radius = Math.min( this.canvasBreite, this.canvasHoehe ) * 0.4;
 
     kontext.strokeStyle = "#00ff00"; // grün
 
@@ -271,8 +280,9 @@ export class HomePage implements AfterViewInit {
                );
     kontext.stroke();
 
-    console.log("Kreis gezeichnet.");
+    console.log( "Kreis gezeichnet." );
   }
+
 
   /**
    * Methode um Ellipse in Canvas zu zeichnen.
@@ -298,12 +308,13 @@ export class HomePage implements AfterViewInit {
                    );
     kontext.stroke();
 
-    console.log("Ellipse gezeichnet.");
+    console.log( "Ellipse gezeichnet." );
   }
+
 
   /**
    * Methode um Bézierkurve dritten Grades zu zeichnen.
-   * 
+   *
    */
   private zeichneBezier() {
 
@@ -326,8 +337,8 @@ export class HomePage implements AfterViewInit {
     const kp2y = this.canvasHoehe  * 0.2;
 
     kontext.beginPath();
-    kontext.moveTo(startpunktX, startpunktY);
-    kontext.bezierCurveTo(kp1x, kp1y, kp2x, kp2y, endpunktX, endpunktY);
+    kontext.moveTo( startpunktX, startpunktY );
+    kontext.bezierCurveTo( kp1x, kp1y, kp2x, kp2y, endpunktX, endpunktY );
     kontext.stroke();
 
     // Kontrollpunkte als "Minikreise" darstellen
@@ -348,7 +359,7 @@ export class HomePage implements AfterViewInit {
     kontext.stroke();
     */
 
-    console.log("Bezierkurve gezeichnet.");
+    console.log( "Bezierkurve gezeichnet." );
   }
 
 }
