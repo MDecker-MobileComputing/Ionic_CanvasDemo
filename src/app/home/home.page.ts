@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
+
 /**
  * Demo für Zeichnen auf HTML5-Canvas-Element.
  * <br><br>
