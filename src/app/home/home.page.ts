@@ -166,7 +166,7 @@ export class HomePage implements AfterViewInit {
         this.zeichneBezier();
         break;
 
-      default: console.log( `Unerwartetes Motiv "${this.motiv}" ausgewählt.` );
+      default: console.log( `FEHLER: Unerwartetes Motiv "${this.motiv}" ausgewählt.` );
     }
   }
 
@@ -303,7 +303,7 @@ export class HomePage implements AfterViewInit {
     kontext.strokeStyle = "#0000ff"; // blau
 
     kontext.beginPath();
-    kontext.ellipse( mittelpunktX, mittelpunktY,
+    kontext.ellipse( mittelpunktX    , mittelpunktY,
                      radiusHorizontal, radiusVertikal,
                      0,          // Rotation
                      0,          // Startwinkel
