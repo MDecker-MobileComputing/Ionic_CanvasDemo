@@ -43,7 +43,7 @@ export class HomePage implements AfterViewInit {
    */
   public ngAfterViewInit() {
 
-    this.initCanvas();
+    this.initialisiereCanvas();
   }
 
 
@@ -57,7 +57,7 @@ export class HomePage implements AfterViewInit {
   @HostListener("window:resize") onViewportSizeChanged() {
 
     console.log( "Viewport-Dimension geändert!" );
-    this.initCanvas();
+    this.initialisiereCanvas();
   }
 
 
@@ -82,7 +82,7 @@ export class HomePage implements AfterViewInit {
    * Die Methode muss ganz zu Beginn und nach Änderungen der
    * Viewport-Größe aufgerufen werden.
    */
-  private initCanvas() {
+  private initialisiereCanvas() {
 
     const viewportBreite = this.platform.width();
     const viewportHoehe  = this.platform.height();
@@ -325,9 +325,8 @@ export class HomePage implements AfterViewInit {
 
     const startpunktX = 0;
     const startpunktY = 0;
-
-    const endpunktX = this.canvasBreite;
-    const endpunktY = this.canvasHoehe;
+    const endpunktX   = this.canvasBreite;
+    const endpunktY   = this.canvasHoehe;
 
     // Kontrollpunkt 1
     const kp1x = this.canvasBreite * 0.2;
@@ -341,26 +340,6 @@ export class HomePage implements AfterViewInit {
     kontext.moveTo( startpunktX, startpunktY );
     kontext.bezierCurveTo( kp1x, kp1y, kp2x, kp2y, endpunktX, endpunktY );
     kontext.stroke();
-
-    // Kontrollpunkte als "Minikreise" darstellen
-    /*
-    kontext.strokeStyle = "#0000ff"; // blau
-
-    kontext.beginPath();
-    kontext.arc( kp1x, kp1y, // Mittelpunkt
-                 1,  // Radius
-                 0, 2 * Math.PI // Start- und Endwinkel
-               );
-    kontext.stroke();
-    kontext.beginPath();
-    kontext.arc( kp2x, kp2y, // Mittelpunkt
-                 1,  // Radius
-                 0, 2 * Math.PI // Start- und Endwinkel
-               );
-    kontext.stroke();
-    */
-
-    console.log( "Bezierkurve gezeichnet." );
   }
 
 }
