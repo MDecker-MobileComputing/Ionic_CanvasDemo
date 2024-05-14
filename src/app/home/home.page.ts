@@ -19,6 +19,7 @@ export class HomePage implements AfterViewInit {
   /** Member-Variable für Zugriff auf HTML-Element mit Anker `#leinwand`. */
   @ViewChild("leinwand", { static: false }) canvas: any;
 
+  /** Natives Canvas-Element, von dem der Zeichenkontext abgerufen wird. */
   private canvasElement: any;
 
   /** Aktuelle Canvas-Breite in Pixel (px). */
@@ -79,6 +80,7 @@ export class HomePage implements AfterViewInit {
    * füllen und von Zeichenfläche anhand aktueller Viewport-Größe
    * festlegen. Danach wird das aktuell gewählte Motiv gezeichnet.
    * <br><br>
+   *
    * Die Methode muss ganz zu Beginn und nach Änderungen der
    * Viewport-Größe aufgerufen werden.
    */
