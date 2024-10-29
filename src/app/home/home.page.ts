@@ -31,6 +31,7 @@ export class HomePage implements AfterViewInit {
   /** Über RadioButtons in Akkordeon-Element gewählte Motiv, das im Canvas dargestellt wird.  */
   public motiv = "diagonalen";
 
+
   /**
    * Constructor for Dependency Injection.
    *
@@ -235,6 +236,7 @@ export class HomePage implements AfterViewInit {
     console.log( "Dreieck gezeichnet." );
   }
 
+
   /**
    * Zeichnet ein Rechteck.
    */
@@ -260,6 +262,7 @@ export class HomePage implements AfterViewInit {
 
       console.log( "Rechteck gezeichnet." );
   }
+
 
   /**
    * Methode um Kreis in Canvas zu zeichnen.
