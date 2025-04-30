@@ -13,6 +13,7 @@ import { Platform } from '@ionic/angular';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  standalone: false
 })
 export class HomePage implements AfterViewInit {
 
@@ -320,7 +321,6 @@ export class HomePage implements AfterViewInit {
 
   /**
    * Methode um Bézierkurve dritten Grades zu zeichnen.
-   *
    */
   private zeichneBezier() {
 
