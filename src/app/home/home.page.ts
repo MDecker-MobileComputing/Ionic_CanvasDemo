@@ -241,6 +241,7 @@ export class HomePage implements AfterViewInit {
   /**
    * Zeichnet ein Rechteck.
    */
+
   private zeichneRechteck() {
 
       const kontext = this.getZeichenKontext();
@@ -249,7 +250,7 @@ export class HomePage implements AfterViewInit {
       const breite      = this.canvasBreite * 0.7;
       const hoehe       = this.canvasHoehe  * 0.8;
 
-      kontext.strokeStyle = "#ff0000"; // schwarz
+      kontext.strokeStyle = "#ff0000"; // rot
 
       kontext.beginPath();
 
@@ -268,7 +269,7 @@ export class HomePage implements AfterViewInit {
   /**
    * Methode um Kreis in Canvas zu zeichnen.
    */
-   private zeichneKreis() {
+  private zeichneKreis() {
 
     const kontext = this.getZeichenKontext();
 
