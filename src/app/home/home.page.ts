@@ -5,9 +5,12 @@ import { Platform } from '@ionic/angular';
 /**
  * Demo für Zeichnen auf HTML5-Canvas-Element.
  * <br><br>
+ *
  * Vorgehen nach https://devdactic.com/canvas-painting-ionic-4
  * <br><br>
- * Erklärung Koordinatensystem: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
+ *
+ * Erklärung Koordinatensystem:
+ * https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
  */
 @Component({
   selector: 'app-home',
@@ -29,7 +32,10 @@ export class HomePage implements AfterViewInit {
     /** Aktuelle Canvas-Höhe in Pixel (px). */
   private canvasHoehe  = 0;
 
-  /** Über RadioButtons in Akkordeon-Element gewählte Motiv, das im Canvas dargestellt wird.  */
+  /**
+   * Über RadioButtons in Akkordeon-Element gewählte Motiv, das im Canvas
+   * dargestellt wird.
+   */
   public motiv = "diagonalen";
 
 
@@ -57,7 +63,7 @@ export class HomePage implements AfterViewInit {
    * Werkzeug zur Messung aktuelle Viewport-Größe im Browser:
    * https://whatismyviewport.com/
    */
-  @HostListener("window:resize") onViewportSizeChanged() {
+  @HostListener( "window:resize" ) onViewportSizeChanged() {
 
     console.log( "Viewport-Dimension geändert!" );
     this.initialisiereCanvas();
@@ -90,7 +96,8 @@ export class HomePage implements AfterViewInit {
 
     const viewportBreite = this.platform.width();
     const viewportHoehe  = this.platform.height();
-    console.log(`Viewport: breite=${viewportBreite}px, hoehe=${viewportHoehe}px`);
+    console.log(
+      `Viewport: breite=${viewportBreite}px, hoehe=${viewportHoehe}px` );
 
     this.canvasElement = this.canvas.nativeElement;
 
@@ -101,7 +108,8 @@ export class HomePage implements AfterViewInit {
     this.canvasBreite = this.canvasElement.width;
     this.canvasHoehe  = this.canvasElement.height;
 
-    console.log(`Canvas: Breite=${this.canvasElement.width}px, Höhe=${this.canvasElement.height}px`);
+    console.log(
+      `Canvas: Breite=${this.canvasElement.width}px, Höhe=${this.canvasElement.height}px` );
 
     this.motivZeichnen();
   }
