@@ -2,14 +2,14 @@
 
 <br>
 
-This repository contains an [Ionic app](https://ionicframework.com/) with [Angular](https://angular.io/) that demonstrates how
-the [HTML Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial) can be used for drawing.
+Dieses Repository enthält eine [Ionic-App](https://ionicframework.com/) mit [Angular](https://angular.io/), die demonstriert, wie
+das [HTML Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial) zum Zeichnen verwendet werden kann.
 
 <br>
 
 ----
 
-## Screenshot ##
+## Screenshots ##
 
 <br>
 
